@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            width: 70%;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px;
+            cursor: pointer;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            background: #f4f4f4;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        li button {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="输入你的任务">
+        <button onclick="addTask()">添加任务</button>
+
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        // 获取输入框和任务列表的 DOM 元素
+        const taskInput = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+
+        // 添加任务函数
+        function addTask() {
+            const task = taskInput.value;  // 获取输入框的值
+
+            if (task === '') {
+                alert('请输入任务！');
+                return;
+            }
+
+            // 创建新的任务项 (li 元素)
+            const li = document.createElement('li');
+            li.textContent = task;
+
+            // 创建删除按钮
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = '删除';
+            deleteButton.onclick = function() {
+                taskList.removeChild(li);  // 点击删除按钮后，移除任务项
+            };
+
+            // 把删除按钮添加到任务项 (li) 中
+            li.appendChild(deleteButton);
+
+            // 把任务项 (li) 添加到任务列表 (ul) 中
+            taskList.appendChild(li);
+
+            // 清空输入框
+            taskInput.value = '';
+        }
+    </script>
+
+</body>
+</html>
